@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Movimiento Consciente · Evaluación Integral KM</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: #faf7f2;
+    color: #1a1a2e;
+    line-height: 1.6;
+    padding: 0 0 60px 0;
+  }
+
+  /* PORTADA */
+  .header {
+    background: linear-gradient(135deg, #0d1117 0%, #1a1f2e 100%);
+    color: #faf7f2;
+    padding: 50px 24px 60px 24px;
+    text-align: center;
+    border-bottom: 4px solid #c9a96e;
+  }
+  .header .eyebrow {
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: #c9a96e;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .header h1 {
+    font-family: Georgia, 'Palatino Linotype', serif;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .header h2 {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: #c9a96e;
+    font-weight: 400;
+    margin-bottom: 22px;
+  }
+  .header .subtitle {
+    font-size: 14px;
+    color: #c0c0c8;
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
+  .header .firma {
+    margin-top: 22px;
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: #c9a96e;
+    font-size: 15px;
+  }
+
+  /* INTRO */
+  .intro {
+    max-width: 720px;
+    margin: 36px auto 0 auto;
+    padding: 0 22px;
+  }
+  .intro-card {
+    background: #ffffff;
+    border-left: 4px solid #c9a96e;
+    padding: 22px 24px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .intro-card p {
+    font-size: 15.5px;
+    margin-bottom: 12px;
+    color: #2c3e50;
+  }
+  .intro-card p:last-child { margin-bottom: 0; }
+  .intro-card .highlight {
+    color: #c1704a;
+    font-weight: 600;
+  }
+
+  /* SECCIONES */
+  .seccion {
+    max-width: 720px;
+    margin: 32px auto 0 auto;
+    padding: 0 22px;
+  }
+  .seccion-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #c9a96e;
+    padding-bottom: 12px;
+  }
+  .seccion-num {
+    font-family: Georgia, serif;
+    font-size: 36px;
+    color: #c1704a;
+    font-weight: 700;
+    margin-right: 16px;
+    line-height: 1;
+    min-width: 50px;
+  }
+  .seccion-titulo {
+    font-family: Georgia, 'Palatino Linotype', serif;
+    font-size: 22px;
+    color: #2c3e50;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .seccion-subtitulo {
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: #8b7355;
+    font-size: 14px;
+    margin-top: 3px;
+    font-weight: 400;
+  }
+
+  /* PREGUNTAS */
+  .pregunta {
+    margin-bottom: 22px;
+    background: #ffffff;
+    padding: 18px 20px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .pregunta label.q-label {
+    display: block;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  .pregunta .q-hint {
+    display: block;
+    font-style: italic;
+    color: #888899;
+    font-size: 13px;
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+
+  input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="date"], textarea, select {
+    width: 100%;
+    padding: 11px 13px;
+    border: 1.5px solid #d8d4cb;
+    border-radius: 4px;
+    font-size: 15px;
+    font-family: inherit;
+    background: #faf7f2;
+    color: #1a1a2e;
+    transition: border 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #c9a96e;
+    background: #ffffff;
+  }
+  textarea {
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.5;
+  }
+
+  /* OPCIONES (checkbox/radio visuales) */
+  .opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .opcion {
+    display: flex;
+    align-items: flex-start;
+    padding: 11px 14px;
+    border: 1.5px solid #d8d4cb;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #faf7f2;
+    transition: all 0.15s;
+    font-size: 14.5px;
+    color: #2c3e50;
+    line-height: 1.4;
+  }
+  .opcion:hover { border-color: #c9a96e; }
+  .opcion.selected {
+    background: #f5ede0;
+    border-color: #c1704a;
+    color: #1a1a2e;
+    font-weight: 500;
+  }
+  .opcion .check {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #8b7355;
+    border-radius: 3px;
+    margin-right: 11px;
+    flex-shrink: 0;
+    position: relative;
+    top: 1px;
+    transition: all 0.15s;
+  }
+  .opcion.radio .check { border-radius: 50%; }
+  .opcion.selected .check {
+    background: #c1704a;
+    border-color: #c1704a;
+  }
+  .opcion.selected .check::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .opcion.radio.selected .check::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    border: none;
+    transform: none;
+  }
+
+  /* GRID 2 COLUMNAS para opciones cortas */
+  .opciones.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  @media (max-width: 480px) {
+    .opciones.grid-2 { grid-template-columns: 1fr; }
+  }
+
+  /* ESCALA 0-10 */
+  .escala {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+  .escala .nivel {
+    flex: 1;
+    min-width: 32px;
+    padding: 10px 0;
+    text-align: center;
+    border: 1.5px solid #d8d4cb;
+    border-radius: 4px;
+    background: #faf7f2;
+    cursor: pointer;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+    transition: all 0.15s;
+  }
+  .escala .nivel:hover { border-color: #c9a96e; }
+  .escala .nivel.selected {
+    background: #c1704a;
+    color: #ffffff;
+    border-color: #c1704a;
+  }
+  .escala-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11.5px;
+    color: #8b7355;
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* BLOQUE CONDICIONAL */
+  .bloque-condicional {
+    display: none;
+    margin-top: 12px;
+    padding: 14px;
+    background: #f5ede0;
+    border-left: 3px solid #c9a96e;
+    border-radius: 4px;
+  }
+  .bloque-condicional.visible { display: block; }
+
+  /* BLOQUE MATERIAL CON GRID 2 COLUMNAS */
+  .material-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  @media (max-width: 480px) {
+    .material-grid { grid-template-columns: 1fr; }
+  }
+
+  /* BLOQUE LOPDGDD */
+  .lopd-card {
+    background: #ffffff;
+    border: 1.5px solid #d8d4cb;
+    border-radius: 6px;
+    padding: 20px 22px;
+    margin-top: 14px;
+  }
+  .lopd-card h4 {
+    font-family: Georgia, serif;
+    color: #c1704a;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 14px 0 6px 0;
+  }
+  .lopd-card h4:first-child { margin-top: 0; }
+  .lopd-card p {
+    font-size: 13.5px;
+    color: #4a4a6a;
+    margin-bottom: 8px;
+    line-height: 1.55;
+  }
+  .lopd-card ul {
+    margin: 6px 0 10px 20px;
+    font-size: 13.5px;
+    color: #4a4a6a;
+  }
+  .lopd-card ul li { margin-bottom: 3px; line-height: 1.5; }
+  .lopd-card .contacto {
+    background: #f5ede0;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-top: 12px;
+    font-size: 13.5px;
+    color: #2c3e50;
+  }
+  .checkbox-consent {
+    display: flex;
+    align-items: flex-start;
+    padding: 14px 16px;
+    border: 1.5px solid #d8d4cb;
+    border-radius: 4px;
+    background: #faf7f2;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 14px;
+    color: #2c3e50;
+    line-height: 1.5;
+  }
+  .checkbox-consent:hover { border-color: #c9a96e; }
+  .checkbox-consent.selected {
+    background: #f5ede0;
+    border-color: #c1704a;
+  }
+  .checkbox-consent .check {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #8b7355;
+    border-radius: 3px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    position: relative;
+    top: 1px;
+    transition: all 0.15s;
+  }
+  .checkbox-consent.selected .check {
+    background: #c1704a;
+    border-color: #c1704a;
+  }
+  .checkbox-consent.selected .check::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 6px;
+    height: 11px;
+    border: solid white;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+  .checkbox-consent .obligatorio {
+    color: #c1704a;
+    font-weight: 700;
+    margin-left: 4px;
+  }
+  .checkbox-consent.error {
+    border-color: #f44336;
+    background: #fff5f5;
+    animation: shake 0.4s;
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  /* AVISO FINAL */
+  .aviso-final {
+    max-width: 720px;
+    margin: 40px auto 24px auto;
+    padding: 20px 22px;
+    background: #2c3e50;
+    color: #faf7f2;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .aviso-final h3 {
+    font-family: Georgia, serif;
+    color: #c9a96e;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .aviso-final p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d8d4cb;
+  }
+
+  /* BOTÓN PDF */
+  .pdf-section {
+    max-width: 720px;
+    margin: 28px auto 0 auto;
+    padding: 0 22px;
+    text-align: center;
+  }
+  .btn-pdf {
+    background: linear-gradient(135deg, #c1704a 0%, #c9a96e 100%);
+    color: #ffffff;
+    border: none;
+    padding: 16px 36px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(193, 112, 74, 0.35);
+    letter-spacing: 0.5px;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.1s;
+  }
+  .btn-pdf:active { transform: scale(0.98); }
+  .btn-instrucciones {
+    margin-top: 14px;
+    font-style: italic;
+    color: #8b7355;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  /* FIRMA */
+  .firma-final {
+    max-width: 720px;
+    margin: 30px auto 0 auto;
+    padding: 0 22px;
+    text-align: center;
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: #8b7355;
+    font-size: 14px;
+  }
+  .firma-final strong {
+    color: #c1704a;
+    font-style: normal;
+    display: block;
+    margin-top: 4px;
+    font-size: 15px;
+  }
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<header class="header">
+  <div class="eyebrow">Kiko Martínez · Bienestar Natural</div>
+  <h1>Movimiento Consciente</h1>
+  <h2>Evaluación Integral del Cuerpo en Movimiento</h2>
+  <p class="subtitle">
+    Un mapa cuidadoso de tu cuerpo, tu historia y tus posibilidades de moverte mejor.
+    Lo usaremos para diseñar tu Programa Integral de Movimiento — yoga, fuerza, movilidad y calistenia adaptados a ti.
+  </p>
+  <div class="firma">— Kiko</div>
+</header>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="intro-card">
+    <p>Antes de empezar, gracias por confiar en este proceso. Las respuestas que dejes aquí me permiten escuchar tu cuerpo con detalle y construir un programa que <span class="highlight">se adapte a ti, no al revés</span>.</p>
+    <p>No hay respuestas correctas ni incorrectas. Sé honesto/a contigo mismo/a — cuanto más real sea tu lectura, más precisa será mi propuesta. Si alguna pregunta no aplica o prefieres no responderla, puedes saltarla sin problema.</p>
+    <p>Cuando termines, pulsa el botón <span class="highlight">"Generar PDF"</span> al final y envíame el archivo por WhatsApp. Dedicaré tiempo a leerte con atención antes de diseñar tu programa.</p>
+  </div>
+</div>
+
+<!-- SECCIÓN 1 — DATOS PERSONALES -->
+<section class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-num">1</div>
+    <div>
+      <div class="seccion-titulo">Datos personales</div>
+      <div class="seccion-subtitulo">Para conocerte un poco</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">Nombre y apellidos</label>
+    <input type="text" data-q="nombre" placeholder="Tu nombre completo">
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">Edad</label>
+    <input type="number" data-q="edad" placeholder="Años cumplidos" min="14" max="110">
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">Sexo biológico</label>
+    <span class="q-hint">Importante para adaptar la suplementación, ejercicios de suelo pélvico y consideraciones hormonales.</span>
+    <div class="opciones grid-2" data-q="sexo" data-tipo="radio">
+      <div class="opcion radio" data-val="Mujer"><span class="check"></span>Mujer</div>
+      <div class="opcion radio" data-val="Hombre"><span class="check"></span>Hombre</div>
+      <div class="opcion radio" data-val="Prefiero no decir"><span class="check"></span>Prefiero no decir</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">Profesión / ocupación habitual</label>
+    <span class="q-hint">¿Tu trabajo es sedentario, de pie, físico, mental? Cuéntame brevemente.</span>
+    <input type="text" data-q="profesion" placeholder="Ej.: Administrativa, sedentaria, ordenador 8h/día">
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">Altura aproximada (cm)</label>
+    <input type="number" data-q="altura" placeholder="Ej.: 170" min="120" max="220">
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">Peso aproximado (kg)</label>
+    <span class="q-hint">Opcional. Si prefieres no compartirlo, déjalo en blanco.</span>
+    <input type="number" data-q="peso" placeholder="Ej.: 70" min="30" max="200">
+  </div>
+</section>
+
+<!-- SECCIÓN 2 — TU PUNTO DE PARTIDA -->
+<section class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-num">2</div>
+    <div>
+      <div class="seccion-titulo">Tu punto de partida</div>
+      <div class="seccion-subtitulo">Qué te trae aquí y qué buscas</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Qué te ha llevado a buscar este programa? Cuéntamelo con tus palabras.</label>
+    <span class="q-hint">Lo físico, lo emocional, lo vital. Lo que sientas. Esta es probablemente la pregunta más importante.</span>
+    <textarea data-q="motivo_principal" placeholder="Tómate el tiempo que necesites..."></textarea>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cuál es tu objetivo prioritario con este programa?</label>
+    <span class="q-hint">Elige el que más resuene contigo (puedes marcar hasta 2).</span>
+    <div class="opciones" data-q="objetivo" data-tipo="multi" data-max="2">
+      <div class="opcion" data-val="Rehabilitación tras lesión o dolor"><span class="check"></span>Rehabilitación tras una lesión o dolor crónico</div>
+      <div class="opcion" data-val="Salud general y prevención"><span class="check"></span>Mejorar mi salud general y prevenir problemas</div>
+      <div class="opcion" data-val="Ganar fuerza y masa muscular"><span class="check"></span>Ganar fuerza y masa muscular</div>
+      <div class="opcion" data-val="Mejorar movilidad y flexibilidad"><span class="check"></span>Mejorar mi movilidad y flexibilidad</div>
+      <div class="opcion" data-val="Recomposición corporal"><span class="check"></span>Recomposición corporal (perder grasa, tonificar)</div>
+      <div class="opcion" data-val="Longevidad y envejecer bien"><span class="check"></span>Longevidad — quiero envejecer bien</div>
+      <div class="opcion" data-val="Energía y vitalidad"><span class="check"></span>Recuperar energía y vitalidad</div>
+      <div class="opcion" data-val="Bienestar emocional y regulación del estrés"><span class="check"></span>Bienestar emocional y regulación del estrés</div>
+      <div class="opcion" data-val="Coger el hábito del movimiento"><span class="check"></span>Coger el hábito del movimiento de una vez</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cómo describirías tu nivel de energía vital en general?</label>
+    <div class="escala" data-q="energia" data-tipo="escala">
+      <div class="nivel" data-val="1">1</div><div class="nivel" data-val="2">2</div>
+      <div class="nivel" data-val="3">3</div><div class="nivel" data-val="4">4</div>
+      <div class="nivel" data-val="5">5</div><div class="nivel" data-val="6">6</div>
+      <div class="nivel" data-val="7">7</div><div class="nivel" data-val="8">8</div>
+      <div class="nivel" data-val="9">9</div><div class="nivel" data-val="10">10</div>
+    </div>
+    <div class="escala-labels"><span>Agotado/a</span><span>Pleno/a de energía</span></div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cómo te sientes hoy con tu cuerpo? (relación cuerpo-mente)</label>
+    <textarea data-q="relacion_cuerpo" placeholder="¿Lo sientes aliado, enemigo, lejano, conocido, desconocido...?"></textarea>
+  </div>
+</section>
+
+<!-- SECCIÓN 3 — HISTORIAL MÉDICO Y SALUD -->
+<section class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-num">3</div>
+    <div>
+      <div class="seccion-titulo">Historial médico y salud actual</div>
+      <div class="seccion-subtitulo">Datos clínicos relevantes para diseñar con seguridad</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Padeces alguna de estas patologías? Marca todas las que apliquen.</label>
+    <div class="opciones" data-q="patologias" data-tipo="multi">
+      <div class="opcion" data-val="Hipertensión arterial"><span class="check"></span>Hipertensión arterial (tensión alta)</div>
+      <div class="opcion" data-val="Cardiopatía o problema cardíaco"><span class="check"></span>Cardiopatía o problema cardíaco</div>
+      <div class="opcion" data-val="Diabetes tipo 1 o 2"><span class="check"></span>Diabetes (tipo 1 o 2)</div>
+      <div class="opcion" data-val="Hipotiroidismo / hipertiroidismo"><span class="check"></span>Problemas de tiroides (hipo o hiper)</div>
+      <div class="opcion" data-val="Osteoporosis / osteopenia"><span class="check"></span>Osteoporosis u osteopenia</div>
+      <div class="opcion" data-val="Artrosis"><span class="check"></span>Artrosis</div>
+      <div class="opcion" data-val="Artritis (reumatoide / psoriásica / otra)"><span class="check"></span>Artritis (reumatoide, psoriásica, otra)</div>
+      <div class="opcion" data-val="Fibromialgia o fatiga crónica"><span class="check"></span>Fibromialgia o fatiga crónica</div>
+      <div class="opcion" data-val="Hernia discal o protrusión"><span class="check"></span>Hernia discal o protrusión</div>
+      <div class="opcion" data-val="Escoliosis u otra alteración de columna"><span class="check"></span>Escoliosis u otra alteración de columna</div>
+      <div class="opcion" data-val="Asma o problema respiratorio"><span class="check"></span>Asma u otro problema respiratorio</div>
+      <div class="opcion" data-val="Patología digestiva (SII, gastritis, reflujo...)"><span class="check"></span>Patología digestiva (SII, gastritis, reflujo, otra)</div>
+      <div class="opcion" data-val="Trastorno hormonal (SOP, menopausia, andropausia...)"><span class="check"></span>Trastorno hormonal (SOP, menopausia, andropausia, otro)</div>
+      <div class="opcion" data-val="Ansiedad o depresión diagnosticada"><span class="check"></span>Ansiedad o depresión diagnosticada</div>
+      <div class="opcion" data-val="Migrañas frecuentes"><span class="check"></span>Migrañas o cefaleas frecuentes</div>
+      <div class="opcion" data-val="Patología neurológica"><span class="check"></span>Patología neurológica (Parkinson, esclerosis, otra)</div>
+      <div class="opcion" data-val="Cáncer activo o reciente"><span class="check"></span>Cáncer activo o en seguimiento reciente</div>
+      <div class="opcion" data-val="Suelo pélvico (incontinencia, prolapso...)"><span class="check"></span>Problemas de suelo pélvico (incontinencia, prolapso)</div>
+      <div class="opcion" data-val="Embarazo actual"><span class="check"></span>Embarazo actual</div>
+      <div class="opcion" data-val="Posparto reciente (menos de 1 año)"><span class="check"></span>Posparto reciente (menos de 12 meses)</div>
+      <div class="opcion" data-val="Ninguna de las anteriores"><span class="check"></span>Ninguna de las anteriores</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Has pasado por alguna cirugía importante? ¿Cuándo y de qué?</label>
+    <textarea data-q="cirugias" placeholder="Ej.: 'Cesárea en 2019', 'Operación de menisco hace 2 años', 'Prótesis de cadera en 2022'..."></textarea>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Tomas alguna medicación actualmente? ¿Cuál?</label>
+    <span class="q-hint">Importante para revisar interacciones con suplementación natural y consideraciones cardiovasculares.</span>
+    <textarea data-q="medicacion" placeholder="Lista todos los medicamentos y dosis si las recuerdas."></textarea>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Tomas algún suplemento o fitoterapia actualmente?</label>
+    <textarea data-q="suplementos_actuales" placeholder="Ej.: Magnesio, vitamina D, omega 3, valeriana..."></textarea>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Tienes alergias o intolerancias relevantes?</label>
+    <input type="text" data-q="alergias" placeholder="Alimentarias, medicamentos, otras...">
+  </div>
+</section>
+
+<!-- SECCIÓN 4 — MAPA DEL CUERPO -->
+<section class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-num">4</div>
+    <div>
+      <div class="seccion-titulo">Mapa del cuerpo</div>
+      <div class="seccion-subtitulo">Zonas de tensión, dolor o limitación</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Tienes dolor o molestia en alguna zona del cuerpo de forma habitual? Marca todas las que apliquen.</label>
+    <div class="opciones grid-2" data-q="zonas_dolor" data-tipo="multi">
+      <div class="opcion" data-val="Cervicales / cuello"><span class="check"></span>Cervicales / cuello</div>
+      <div class="opcion" data-val="Trapecios / hombros"><span class="check"></span>Trapecios / hombros</div>
+      <div class="opcion" data-val="Zona dorsal / entre escápulas"><span class="check"></span>Zona dorsal / entre escápulas</div>
+      <div class="opcion" data-val="Lumbares / zona baja de la espalda"><span class="check"></span>Lumbares</div>
+      <div class="opcion" data-val="Sacro / glúteos"><span class="check"></span>Sacro / glúteos</div>
+      <div class="opcion" data-val="Caderas"><span class="check"></span>Caderas</div>
+      <div class="opcion" data-val="Rodillas"><span class="check"></span>Rodillas</div>
+      <div class="opcion" data-val="Tobillos / pies"><span class="check"></span>Tobillos / pies</div>
+      <div class="opcion" data-val="Codos / muñecas"><span class="check"></span>Codos / muñecas</div>
+      <div class="opcion" data-val="Mandíbula / ATM"><span class="check"></span>Mandíbula / ATM</div>
+      <div class="opcion" data-val="Cabeza (tensional)"><span class="check"></span>Cabeza (cefalea tensional)</div>
+      <div class="opcion" data-val="Ninguna zona concreta"><span class="check"></span>Ninguna zona concreta</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">Describe ese dolor o molestia: ¿cuándo aparece, qué lo desencadena, cómo se calma?</label>
+    <textarea data-q="descripcion_dolor" placeholder="Ej.: 'Lumbalgia al final del día sentada, mejora cuando me muevo o estiro'"></textarea>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Tienes alguna lesión activa o reciente (último año)?</label>
+    <textarea data-q="lesiones" placeholder="Ej.: 'Esguince de tobillo hace 3 meses', 'Tendinitis de hombro en proceso de recuperación'..."></textarea>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">Si tuvieras que poner un número a la intensidad media de tu dolor o tensión corporal estos días...</label>
+    <div class="escala" data-q="intensidad_dolor" data-tipo="escala">
+      <div class="nivel" data-val="0">0</div><div class="nivel" data-val="1">1</div>
+      <div class="nivel" data-val="2">2</div><div class="nivel" data-val="3">3</div>
+      <div class="nivel" data-val="4">4</div><div class="nivel" data-val="5">5</div>
+      <div class="nivel" data-val="6">6</div><div class="nivel" data-val="7">7</div>
+      <div class="nivel" data-val="8">8</div><div class="nivel" data-val="9">9</div>
+      <div class="nivel" data-val="10">10</div>
+    </div>
+    <div class="escala-labels"><span>Sin dolor</span><span>Dolor insoportable</span></div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cómo describirías tu postura habitual?</label>
+    <div class="opciones" data-q="postura" data-tipo="radio">
+      <div class="opcion radio" data-val="Generalmente correcta y consciente"><span class="check"></span>Generalmente correcta y consciente</div>
+      <div class="opcion radio" data-val="Encorvada hacia delante (mucho sentarse / pantallas)"><span class="check"></span>Encorvada hacia delante (mucho ordenador o móvil)</div>
+      <div class="opcion radio" data-val="Cabeza adelantada"><span class="check"></span>Cabeza adelantada respecto a los hombros</div>
+      <div class="opcion radio" data-val="Hiperlordosis lumbar (curva muy marcada)"><span class="check"></span>Hiperlordosis lumbar (curva muy marcada en la zona baja)</div>
+      <div class="opcion radio" data-val="Una cadera o un hombro más altos que el otro"><span class="check"></span>Asimetría: una cadera o un hombro más altos que el otro</div>
+      <div class="opcion radio" data-val="No estoy seguro/a"><span class="check"></span>No estoy seguro/a</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 5 — TU EXPERIENCIA CON EL MOVIMIENTO -->
+<section class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-num">5</div>
+    <div>
+      <div class="seccion-titulo">Tu experiencia con el movimiento</div>
+      <div class="seccion-subtitulo">Historial deportivo y de prácticas corporales</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cuál es tu nivel de actividad física <strong>actual</strong>?</label>
+    <div class="opciones" data-q="actividad_actual" data-tipo="radio">
+      <div class="opcion radio" data-val="Sedentario/a — apenas me muevo"><span class="check"></span>Sedentario/a — apenas me muevo</div>
+      <div class="opcion radio" data-val="Movimiento ocasional (paseos)"><span class="check"></span>Movimiento ocasional (algún paseo)</div>
+      <div class="opcion radio" data-val="Activo/a 1-2 días por semana"><span class="check"></span>Activo/a 1-2 días por semana</div>
+      <div class="opcion radio" data-val="Activo/a 3-4 días por semana"><span class="check"></span>Activo/a 3-4 días por semana</div>
+      <div class="opcion radio" data-val="Muy activo/a 5+ días por semana"><span class="check"></span>Muy activo/a 5+ días por semana</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Qué tipo de movimiento o ejercicio has practicado en tu vida? Marca todo lo que apliquen.</label>
+    <div class="opciones grid-2" data-q="experiencia" data-tipo="multi">
+      <div class="opcion" data-val="Yoga"><span class="check"></span>Yoga</div>
+      <div class="opcion" data-val="Pilates"><span class="check"></span>Pilates</div>
+      <div class="opcion" data-val="Pesas / gimnasio"><span class="check"></span>Pesas / gimnasio</div>
+      <div class="opcion" data-val="Calistenia / peso corporal"><span class="check"></span>Calistenia / peso corporal</div>
+      <div class="opcion" data-val="CrossFit / HIIT"><span class="check"></span>CrossFit / HIIT</div>
+      <div class="opcion" data-val="Running / carrera"><span class="check"></span>Running / carrera</div>
+      <div class="opcion" data-val="Bicicleta"><span class="check"></span>Bicicleta</div>
+      <div class="opcion" data-val="Natación"><span class="check"></span>Natación</div>
+      <div class="opcion" data-val="Senderismo / montaña"><span class="check"></span>Senderismo / montaña</div>
+      <div class="opcion" data-val="Artes marciales"><span class="check"></span>Artes marciales</div>
+      <div class="opcion" data-val="Danza"><span class="check"></span>Danza</div>
+      <div class="opcion" data-val="Tai Chi / Qi Gong"><span class="check"></span>Tai Chi / Qi Gong</div>
+      <div class="opcion" data-val="Deporte de equipo"><span class="check"></span>Deporte de equipo (fútbol, baloncesto...)</div>
+      <div class="opcion" data-val="Tenis / pádel"><span class="check"></span>Tenis / pádel</div>
+      <div class="opcion" data-val="Nunca he hecho ejercicio formal"><span class="check"></span>Nunca he hecho ejercicio formal</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Has practicado yoga alguna vez? Si sí, cuéntame brevemente.</label>
+    <textarea data-q="experiencia_yoga" placeholder="Cuánto tiempo, qué estilo, qué tal te fue, qué te gustó o no..."></textarea>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Has entrenado fuerza (pesas, mancuernas, bandas) alguna vez? Si sí, ¿con qué frecuencia y resultados?</label>
+    <textarea data-q="experiencia_fuerza" placeholder="Cuánto tiempo, qué resultados, qué disfrutaste o te costó..."></textarea>
+  </div>
+</section>
+
+<!-- SECCIÓN 6 — CAPACIDADES FÍSICAS ACTUALES -->
+<section class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-num">6</div>
+    <div>
+      <div class="seccion-titulo">Capacidades físicas actuales</div>
+      <div class="seccion-subtitulo">Autoevaluación honesta — no hay respuestas malas</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cómo valoras tu <strong>fuerza</strong> general?</label>
+    <span class="q-hint">¿Levantar peso, cargar la compra, subir escaleras sin esfuerzo?</span>
+    <div class="escala" data-q="fuerza" data-tipo="escala">
+      <div class="nivel" data-val="1">1</div><div class="nivel" data-val="2">2</div>
+      <div class="nivel" data-val="3">3</div><div class="nivel" data-val="4">4</div>
+      <div class="nivel" data-val="5">5</div><div class="nivel" data-val="6">6</div>
+      <div class="nivel" data-val="7">7</div><div class="nivel" data-val="8">8</div>
+      <div class="nivel" data-val="9">9</div><div class="nivel" data-val="10">10</div>
+    </div>
+    <div class="escala-labels"><span>Muy débil</span><span>Muy fuerte</span></div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cómo valoras tu <strong>movilidad y flexibilidad</strong>?</label>
+    <span class="q-hint">¿Tocar el suelo con las manos, mirar atrás cómodo/a, agacharte sin molestia?</span>
+    <div class="escala" data-q="movilidad" data-tipo="escala">
+      <div class="nivel" data-val="1">1</div><div class="nivel" data-val="2">2</div>
+      <div class="nivel" data-val="3">3</div><div class="nivel" data-val="4">4</div>
+      <div class="nivel" data-val="5">5</div><div class="nivel" data-val="6">6</div>
+      <div class="nivel" data-val="7">7</div><div class="nivel" data-val="8">8</div>
+      <div class="nivel" data-val="9">9</div><div class="nivel" data-val="10">10</div>
+    </div>
+    <div class="escala-labels"><span>Muy rígido/a</span><span>Muy flexible</span></div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cómo valoras tu <strong>equilibrio</strong>?</label>
+    <span class="q-hint">¿Aguantas a la pata coja, te mareas al cambiar de posición?</span>
+    <div class="escala" data-q="equilibrio" data-tipo="escala">
+      <div class="nivel" data-val="1">1</div><div class="nivel" data-val="2">2</div>
+      <div class="nivel" data-val="3">3</div><div class="nivel" data-val="4">4</div>
+      <div class="nivel" data-val="5">5</div><div class="nivel" data-val="6">6</div>
+      <div class="nivel" data-val="7">7</div><div class="nivel" data-val="8">8</div>
+      <div class="nivel" data-val="9">9</div><div class="nivel" data-val="10">10</div>
+    </div>
+    <div class="escala-labels"><span>Muy inestable</span><span>Muy estable</span></div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cómo valoras tu <strong>resistencia cardiovascular</strong>?</label>
+    <span class="q-hint">¿Te falta el aire al subir escaleras, andar rápido, cargar peso?</span>
+    <div class="escala" data-q="resistencia" data-tipo="escala">
+      <div class="nivel" data-val="1">1</div><div class="nivel" data-val="2">2</div>
+      <div class="nivel" data-val="3">3</div><div class="nivel" data-val="4">4</div>
+      <div class="nivel" data-val="5">5</div><div class="nivel" data-val="6">6</div>
+      <div class="nivel" data-val="7">7</div><div class="nivel" data-val="8">8</div>
+      <div class="nivel" data-val="9">9</div><div class="nivel" data-val="10">10</div>
+    </div>
+    <div class="escala-labels"><span>Me ahogo enseguida</span><span>Resistencia excelente</span></div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Puedes hacer estos movimientos básicos hoy? Marca lo que sí puedes.</label>
+    <div class="opciones" data-q="capacidades_basicas" data-tipo="multi">
+      <div class="opcion" data-val="Bajar al suelo y levantarme sin ayuda"><span class="check"></span>Bajar al suelo y levantarme sin apoyarme</div>
+      <div class="opcion" data-val="Hacer una sentadilla profunda"><span class="check"></span>Hacer una sentadilla profunda (culo cerca del suelo)</div>
+      <div class="opcion" data-val="Sostenerme a la pata coja 30 segundos"><span class="check"></span>Sostenerme a la pata coja durante 30 segundos</div>
+      <div class="opcion" data-val="Hacer una flexión completa de brazos"><span class="check"></span>Hacer al menos una flexión de brazos completa</div>
+      <div class="opcion" data-val="Colgarme de una barra 20 segundos"><span class="check"></span>Colgarme de una barra durante 20 segundos</div>
+      <div class="opcion" data-val="Tocar el suelo con las manos sin doblar las rodillas"><span class="check"></span>Tocarme los pies sin doblar las rodillas</div>
+      <div class="opcion" data-val="Sentarme con piernas cruzadas en el suelo cómodamente"><span class="check"></span>Sentarme con piernas cruzadas en el suelo cómodamente</div>
+      <div class="opcion" data-val="Caminar 30 minutos sin fatigarme"><span class="check"></span>Caminar 30 minutos sin fatigarme</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 7 — SISTEMA NERVIOSO Y ESTADO EMOCIONAL -->
+<section class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-num">7</div>
+    <div>
+      <div class="seccion-titulo">Sistema nervioso y estado emocional</div>
+      <div class="seccion-subtitulo">Tu energía interior y regulación</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cuál es tu nivel de estrés percibido habitual?</label>
+    <div class="escala" data-q="estres" data-tipo="escala">
+      <div class="nivel" data-val="1">1</div><div class="nivel" data-val="2">2</div>
+      <div class="nivel" data-val="3">3</div><div class="nivel" data-val="4">4</div>
+      <div class="nivel" data-val="5">5</div><div class="nivel" data-val="6">6</div>
+      <div class="nivel" data-val="7">7</div><div class="nivel" data-val="8">8</div>
+      <div class="nivel" data-val="9">9</div><div class="nivel" data-val="10">10</div>
+    </div>
+    <div class="escala-labels"><span>En calma</span><span>Saturación total</span></div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Con cuál de estos perfiles te identificas más en este momento de tu vida?</label>
+    <div class="opciones" data-q="perfil_SN" data-tipo="radio">
+      <div class="opcion radio" data-val="Activado/a — ansiedad, tensión, mente acelerada"><span class="check"></span>🔥 <strong>Activado/a</strong> — voy revolucionado/a, mente acelerada, tensión muscular, dificultad para descansar</div>
+      <div class="opcion radio" data-val="Bloqueado/a — fatiga, desconexión, baja energía"><span class="check"></span>❄️ <strong>Bloqueado/a</strong> — fatiga crónica, desconexión emocional, baja energía, "todo me da igual"</div>
+      <div class="opcion radio" data-val="Mixto — alternancia entre ansiedad y agotamiento"><span class="check"></span>🌊 <strong>Mixto</strong> — alterno entre ansiedad y agotamiento</div>
+      <div class="opcion radio" data-val="Regulado — me siento estable y presente la mayor parte del tiempo"><span class="check"></span>🌿 <strong>Regulado/a</strong> — me siento estable y presente la mayor parte del tiempo</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cómo es tu sueño habitualmente?</label>
+    <div class="opciones" data-q="sueno" data-tipo="radio">
+      <div class="opcion radio" data-val="Excelente — duermo profundo y me levanto descansado/a"><span class="check"></span>Excelente — duermo profundo y me levanto descansado/a</div>
+      <div class="opcion radio" data-val="Bueno con algún problema puntual"><span class="check"></span>Bueno, con algún problema puntual</div>
+      <div class="opcion radio" data-val="Me cuesta dormirme"><span class="check"></span>Me cuesta dormirme (mente acelerada al acostarme)</div>
+      <div class="opcion radio" data-val="Me despierto durante la noche"><span class="check"></span>Me despierto durante la noche y luego no concilio</div>
+      <div class="opcion radio" data-val="Me despierto cansado/a aunque duerma muchas horas"><span class="check"></span>Me despierto cansado/a aunque duerma muchas horas</div>
+      <div class="opcion radio" data-val="Insomnio severo"><span class="check"></span>Insomnio severo (mucha dificultad para dormir)</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Estás pasando por algún momento vital especialmente difícil?</label>
+    <span class="q-hint">Pérdida, duelo, separación, crisis profesional, enfermedad cercana, cambio importante. Solo lo que quieras compartir.</span>
+    <textarea data-q="momento_vital" placeholder="Tómate tu espacio."></textarea>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cómo describirías tu relación con tu mente?</label>
+    <div class="opciones" data-q="relacion_mente" data-tipo="radio">
+      <div class="opcion radio" data-val="Tranquila, presente"><span class="check"></span>Tranquila, presente, capaz de enfocarme</div>
+      <div class="opcion radio" data-val="Rumio mucho, doy vueltas a las cosas"><span class="check"></span>Rumio mucho, doy vueltas a las cosas</div>
+      <div class="opcion radio" data-val="Me cuesta concentrarme y mantenerme presente"><span class="check"></span>Me cuesta concentrarme y mantenerme presente</div>
+      <div class="opcion radio" data-val="Autocrítica constante"><span class="check"></span>Autocrítica constante</div>
+      <div class="opcion radio" data-val="Pensamientos intrusivos o ansiedad anticipatoria"><span class="check"></span>Pensamientos intrusivos o ansiedad anticipatoria</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 8 — ESTILO DE VIDA -->
+<section class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-num">8</div>
+    <div>
+      <div class="seccion-titulo">Estilo de vida</div>
+      <div class="seccion-subtitulo">Hábitos que rodean tu movimiento</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cuántas horas duermes habitualmente?</label>
+    <div class="opciones grid-2" data-q="horas_sueno" data-tipo="radio">
+      <div class="opcion radio" data-val="Menos de 5h"><span class="check"></span>Menos de 5 horas</div>
+      <div class="opcion radio" data-val="5-6h"><span class="check"></span>5-6 horas</div>
+      <div class="opcion radio" data-val="6-7h"><span class="check"></span>6-7 horas</div>
+      <div class="opcion radio" data-val="7-8h"><span class="check"></span>7-8 horas</div>
+      <div class="opcion radio" data-val="Más de 8h"><span class="check"></span>Más de 8 horas</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cómo describirías tu alimentación habitual?</label>
+    <div class="opciones" data-q="alimentacion" data-tipo="radio">
+      <div class="opcion radio" data-val="Muy cuidada y consciente"><span class="check"></span>Muy cuidada y consciente — sigo un patrón claro</div>
+      <div class="opcion radio" data-val="Equilibrada con algún capricho"><span class="check"></span>Equilibrada con algún capricho ocasional</div>
+      <div class="opcion radio" data-val="Variable — depende del día y el estrés"><span class="check"></span>Variable — depende del día y el estrés</div>
+      <div class="opcion radio" data-val="Bastante desordenada"><span class="check"></span>Bastante desordenada — me cuesta comer bien</div>
+      <div class="opcion radio" data-val="Dieta especial (vegana, vegetariana, sin gluten...)"><span class="check"></span>Sigo una dieta especial (vegana, vegetariana, sin gluten, otra)</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">Hábitos a tener en cuenta. Marca los que apliquen.</label>
+    <div class="opciones" data-q="habitos_tox" data-tipo="multi">
+      <div class="opcion" data-val="Consumo de alcohol regular (semanal)"><span class="check"></span>Consumo de alcohol regular (semanal o más)</div>
+      <div class="opcion" data-val="Tabaco"><span class="check"></span>Tabaco</div>
+      <div class="opcion" data-val="Café (más de 3 al día)"><span class="check"></span>Café en exceso (más de 3 al día)</div>
+      <div class="opcion" data-val="Mucho tiempo de pantallas (más de 8h)"><span class="check"></span>Mucho tiempo de pantallas (más de 8h)</div>
+      <div class="opcion" data-val="Trabajo nocturno o turnos"><span class="check"></span>Trabajo nocturno o por turnos</div>
+      <div class="opcion" data-val="Estoy sentado/a la mayor parte del día"><span class="check"></span>Estoy sentado/a la mayor parte del día</div>
+      <div class="opcion" data-val="Bebo poca agua"><span class="check"></span>Bebo poca agua</div>
+      <div class="opcion" data-val="Salgo poco al aire libre / poco sol"><span class="check"></span>Salgo poco al aire libre / recibo poco sol</div>
+      <div class="opcion" data-val="Ninguno de los anteriores"><span class="check"></span>Ninguno de los anteriores</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 9 — TIEMPO Y MATERIAL DISPONIBLE -->
+<section class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-num">9</div>
+    <div>
+      <div class="seccion-titulo">Tiempo y material disponible</div>
+      <div class="seccion-subtitulo">Lo realista, no lo ideal</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cuántos días por semana puedes comprometerte a practicar?</label>
+    <div class="opciones grid-2" data-q="dias_semana" data-tipo="radio">
+      <div class="opcion radio" data-val="2 días"><span class="check"></span>2 días</div>
+      <div class="opcion radio" data-val="3 días"><span class="check"></span>3 días</div>
+      <div class="opcion radio" data-val="4 días"><span class="check"></span>4 días</div>
+      <div class="opcion radio" data-val="5 días"><span class="check"></span>5 días</div>
+      <div class="opcion radio" data-val="6 días"><span class="check"></span>6 días</div>
+      <div class="opcion radio" data-val="Todos los días"><span class="check"></span>Todos los días</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Cuánto tiempo puedes dedicar por sesión?</label>
+    <div class="opciones grid-2" data-q="minutos_sesion" data-tipo="radio">
+      <div class="opcion radio" data-val="15 min"><span class="check"></span>15 minutos</div>
+      <div class="opcion radio" data-val="20-30 min"><span class="check"></span>20-30 minutos</div>
+      <div class="opcion radio" data-val="30-45 min"><span class="check"></span>30-45 minutos</div>
+      <div class="opcion radio" data-val="45-60 min"><span class="check"></span>45-60 minutos</div>
+      <div class="opcion radio" data-val="Más de 60 min"><span class="check"></span>Más de 60 minutos</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿En qué momento del día prefieres practicar?</label>
+    <div class="opciones grid-2" data-q="momento_dia" data-tipo="radio">
+      <div class="opcion radio" data-val="Al despertar (6-8h)"><span class="check"></span>Al despertar (6-8h)</div>
+      <div class="opcion radio" data-val="Media mañana (9-11h)"><span class="check"></span>Media mañana (9-11h)</div>
+      <div class="opcion radio" data-val="Mediodía (12-14h)"><span class="check"></span>Mediodía (12-14h)</div>
+      <div class="opcion radio" data-val="Tarde (16-19h)"><span class="check"></span>Tarde (16-19h)</div>
+      <div class="opcion radio" data-val="Antes de dormir (20-22h)"><span class="check"></span>Antes de dormir (20-22h)</div>
+      <div class="opcion radio" data-val="Variable según el día"><span class="check"></span>Variable según el día</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Qué material tienes disponible en casa? Marca todo lo que tengas.</label>
+    <div class="opciones material-grid" data-q="material" data-tipo="multi">
+      <div class="opcion" data-val="Esterilla de yoga"><span class="check"></span>Esterilla de yoga</div>
+      <div class="opcion" data-val="Mancuernas ligeras (2-5 kg)"><span class="check"></span>Mancuernas ligeras (2-5 kg)</div>
+      <div class="opcion" data-val="Mancuernas medias (6-12 kg)"><span class="check"></span>Mancuernas medias (6-12 kg)</div>
+      <div class="opcion" data-val="Mancuernas pesadas (+12 kg)"><span class="check"></span>Mancuernas pesadas (+12 kg)</div>
+      <div class="opcion" data-val="Mancuernas regulables"><span class="check"></span>Mancuernas regulables</div>
+      <div class="opcion" data-val="Bandas elásticas"><span class="check"></span>Bandas elásticas</div>
+      <div class="opcion" data-val="Kettlebell (pesa rusa)"><span class="check"></span>Kettlebell (pesa rusa)</div>
+      <div class="opcion" data-val="Barra de dominadas"><span class="check"></span>Barra de dominadas</div>
+      <div class="opcion" data-val="Bloques de yoga"><span class="check"></span>Bloques de yoga</div>
+      <div class="opcion" data-val="Cinturón o cinta de yoga"><span class="check"></span>Cinturón o cinta de yoga</div>
+      <div class="opcion" data-val="Pelota de pilates / fitball"><span class="check"></span>Pelota de pilates / fitball</div>
+      <div class="opcion" data-val="Rodillo (foam roller)"><span class="check"></span>Rodillo (foam roller)</div>
+      <div class="opcion" data-val="Pelota pequeña / pelota tenis"><span class="check"></span>Pelota pequeña / pelota de tenis</div>
+      <div class="opcion" data-val="TRX o anillas"><span class="check"></span>TRX o anillas</div>
+      <div class="opcion" data-val="Silla resistente"><span class="check"></span>Silla resistente (sirve para muchos ejercicios)</div>
+      <div class="opcion" data-val="Espacio amplio (al menos 2x2m)"><span class="check"></span>Espacio amplio (al menos 2x2m)</div>
+      <div class="opcion" data-val="No tengo nada todavía"><span class="check"></span>No tengo nada todavía</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Estarías dispuesto/a a comprar material básico si te lo recomiendo?</label>
+    <div class="opciones" data-q="comprar_material" data-tipo="radio">
+      <div class="opcion radio" data-val="Sí, lo que haga falta"><span class="check"></span>Sí, lo que haga falta</div>
+      <div class="opcion radio" data-val="Sí, pero con presupuesto ajustado"><span class="check"></span>Sí, pero con presupuesto ajustado (máx. 30-50€)</div>
+      <div class="opcion radio" data-val="Solo si es imprescindible"><span class="check"></span>Solo si es imprescindible</div>
+      <div class="opcion radio" data-val="Prefiero adaptar con lo que tengo"><span class="check"></span>Prefiero adaptar el programa con lo que tengo</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 10 — PREFERENCIAS Y DISFRUTE -->
+<section class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-num">10</div>
+    <div>
+      <div class="seccion-titulo">Preferencias y disfrute</div>
+      <div class="seccion-subtitulo">El movimiento que disfrutas es el que sostienes</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Qué tipo de movimiento te atrae más? (puedes marcar varios)</label>
+    <div class="opciones grid-2" data-q="atrae" data-tipo="multi">
+      <div class="opcion" data-val="Yoga / práctica suave"><span class="check"></span>Yoga / práctica suave</div>
+      <div class="opcion" data-val="Fuerza con pesas"><span class="check"></span>Fuerza con pesas</div>
+      <div class="opcion" data-val="Movimientos dinámicos (calistenia)"><span class="check"></span>Movimientos dinámicos (calistenia)</div>
+      <div class="opcion" data-val="Movilidad y estiramientos"><span class="check"></span>Movilidad y estiramientos</div>
+      <div class="opcion" data-val="Cardio (caminar, correr, bici)"><span class="check"></span>Cardio (caminar, correr, bici)</div>
+      <div class="opcion" data-val="Movimientos artísticos (danza, flow)"><span class="check"></span>Movimientos artísticos (danza, flow)</div>
+      <div class="opcion" data-val="Trabajo en silencio (meditación)"><span class="check"></span>Trabajo en silencio (meditación, respiración)</div>
+      <div class="opcion" data-val="Aún no lo sé"><span class="check"></span>Aún no lo sé — confío en lo que me recomiendes</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Qué tipo de movimiento te aburre, te incomoda o te bloquea?</label>
+    <textarea data-q="aburre" placeholder="Honestidad total. Si los burpees te hunden, dímelo. Si las clases largas te bloquean, dímelo."></textarea>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Prefieres practicar en silencio o con música?</label>
+    <div class="opciones grid-2" data-q="musica" data-tipo="radio">
+      <div class="opcion radio" data-val="Silencio total"><span class="check"></span>Silencio total</div>
+      <div class="opcion radio" data-val="Música suave / instrumental"><span class="check"></span>Música suave / instrumental</div>
+      <div class="opcion radio" data-val="Música motivadora"><span class="check"></span>Música motivadora / con ritmo</div>
+      <div class="opcion radio" data-val="Naturaleza"><span class="check"></span>Sonidos de la naturaleza</div>
+      <div class="opcion radio" data-val="Depende del día"><span class="check"></span>Depende del día y el tipo de práctica</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 11 — COMPROMISO Y MOTIVACIÓN -->
+<section class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-num">11</div>
+    <div>
+      <div class="seccion-titulo">Compromiso y motivación</div>
+      <div class="seccion-subtitulo">Para entender qué te ayudará a sostener el proceso</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">Del 1 al 10, ¿cuán comprometido/a te sientes hoy con este programa?</label>
+    <span class="q-hint">Honestidad. No hay penalización por ser realista.</span>
+    <div class="escala" data-q="compromiso" data-tipo="escala">
+      <div class="nivel" data-val="1">1</div><div class="nivel" data-val="2">2</div>
+      <div class="nivel" data-val="3">3</div><div class="nivel" data-val="4">4</div>
+      <div class="nivel" data-val="5">5</div><div class="nivel" data-val="6">6</div>
+      <div class="nivel" data-val="7">7</div><div class="nivel" data-val="8">8</div>
+      <div class="nivel" data-val="9">9</div><div class="nivel" data-val="10">10</div>
+    </div>
+    <div class="escala-labels"><span>Poco</span><span>Total</span></div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Qué te ha hecho abandonar otros programas o rutinas en el pasado?</label>
+    <textarea data-q="abandono" placeholder="Falta de tiempo, aburrimiento, dolor, falta de resultados, exigencia excesiva..."></textarea>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Qué te ayudaría a mantener el compromiso esta vez?</label>
+    <div class="opciones" data-q="ayuda_compromiso" data-tipo="multi">
+      <div class="opcion" data-val="Ver resultados visibles pronto"><span class="check"></span>Ver resultados visibles pronto</div>
+      <div class="opcion" data-val="Que el programa sea claro y simple"><span class="check"></span>Que el programa sea claro y simple</div>
+      <div class="opcion" data-val="Que sea variado y no me aburra"><span class="check"></span>Que sea variado y no me aburra</div>
+      <div class="opcion" data-val="Seguimiento periódico contigo"><span class="check"></span>Seguimiento periódico contigo</div>
+      <div class="opcion" data-val="Que sea breve cada día"><span class="check"></span>Que sea breve cada día (máximo 30 min)</div>
+      <div class="opcion" data-val="Sentir que disfruto la práctica"><span class="check"></span>Sentir que disfruto la práctica, no solo que la sufro</div>
+      <div class="opcion" data-val="Que conecte con la dimensión emocional"><span class="check"></span>Que conecte con la dimensión emocional, no solo física</div>
+      <div class="opcion" data-val="Sistema de gamificación / retos"><span class="check"></span>Sistema de gamificación / retos / medallas</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 12 — OBSERVACIONES LIBRES -->
+<section class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-num">12</div>
+    <div>
+      <div class="seccion-titulo">Observaciones libres</div>
+      <div class="seccion-subtitulo">Lo que quieras compartir y no haya tenido sitio</div>
+    </div>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿Hay algo más que quieras contarme para ayudarme a diseñar tu programa?</label>
+    <span class="q-hint">Miedos, expectativas, experiencias previas con terapeutas, lo que sea. Este es tu espacio.</span>
+    <textarea data-q="observaciones" placeholder="Tómate el tiempo que necesites." style="min-height:120px;"></textarea>
+  </div>
+
+  <div class="pregunta">
+    <label class="q-label">¿En qué fecha rellenas este cuestionario?</label>
+    <input type="date" data-q="fecha">
+  </div>
+</section>
+
+<!-- SECCIÓN 13 — PROTECCIÓN DE DATOS Y CONSENTIMIENTO -->
+<section class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-num">13</div>
+    <div>
+      <div class="seccion-titulo">Protección de datos y consentimiento</div>
+      <div class="seccion-subtitulo">Información en cumplimiento del RGPD y la LOPDGDD</div>
+    </div>
+  </div>
+
+  <div class="lopd-card">
+    <h4>Responsable del tratamiento</h4>
+    <p><strong>Kiko Martínez · Bienestar Natural</strong>. Profesional independiente de terapias naturales (Osteopatía · Coaching · Fitoterapia · Bienestar Integral).</p>
+
+    <h4>Finalidad del tratamiento</h4>
+    <p>Los datos que proporcionas en este cuestionario, incluidos los relativos a tu salud, se utilizarán <strong>exclusivamente</strong> para:</p>
+    <ul>
+      <li>Diseñar tu Programa Integral de Movimiento personalizado de forma segura.</li>
+      <li>Realizar el seguimiento personalizado de tu proceso.</li>
+      <li>Mantener un historial profesional necesario para la prestación del servicio.</li>
+    </ul>
+
+    <h4>Categorías de datos tratados</h4>
+    <p>Datos identificativos (nombre, contacto), datos físicos y, especialmente, <strong>datos de categoría especial relativos a la salud</strong> (art. 9 RGPD): patologías, medicación, lesiones, estado emocional. Estos datos requieren tu consentimiento expreso.</p>
+
+    <h4>Base legal</h4>
+    <p>El tratamiento se basa en tu <strong>consentimiento expreso</strong> (art. 6.1.a y art. 9.2.a del RGPD), que puedes retirar en cualquier momento sin efectos retroactivos.</p>
+
+    <h4>Conservación y destinatarios</h4>
+    <p>Tus datos se conservarán durante el tiempo necesario para la prestación del servicio y los plazos legales aplicables. <strong>No se cederán a terceros</strong> salvo obligación legal. Se almacenarán de forma segura y confidencial.</p>
+
+    <h4>Tus derechos</h4>
+    <p>Puedes ejercer en cualquier momento tus derechos de:</p>
+    <ul>
+      <li><strong>Acceso</strong> — saber qué datos tengo sobre ti.</li>
+      <li><strong>Rectificación</strong> — corregir datos inexactos.</li>
+      <li><strong>Supresión</strong> ("derecho al olvido") — pedir que se borren.</li>
+      <li><strong>Oposición y limitación</strong> del tratamiento.</li>
+      <li><strong>Portabilidad</strong> de tus datos.</li>
+      <li><strong>Revocar el consentimiento</strong> dado.</li>
+    </ul>
+    <p>También tienes derecho a presentar una reclamación ante la <strong>Agencia Española de Protección de Datos</strong> (www.aepd.es) si consideras que el tratamiento no se ajusta a la normativa.</p>
+
+    <div class="contacto">
+      📩 Para ejercer tus derechos, escríbeme directamente a través de WhatsApp o por correo electrónico. Atenderé tu solicitud en el plazo legalmente establecido.
+    </div>
+  </div>
+
+  <!-- CHECKBOXES DE CONSENTIMIENTO -->
+  <div style="margin-top:18px;">
+    <div class="checkbox-consent" data-consent="rgpd" data-obligatorio="true">
+      <span class="check"></span>
+      <span>He leído y comprendido la información sobre el tratamiento de mis datos personales y otorgo mi <strong>consentimiento expreso</strong> para que Kiko Martínez los trate con la finalidad descrita.<span class="obligatorio">(Obligatorio)</span></span>
+    </div>
+
+    <div class="checkbox-consent" data-consent="salud" data-obligatorio="true">
+      <span class="check"></span>
+      <span>Autorizo expresamente el tratamiento de mis <strong>datos relativos a la salud</strong> (patologías, medicación, estado físico y emocional) para el diseño de mi programa personalizado, sabiendo que pueden ser sensibles.<span class="obligatorio">(Obligatorio)</span></span>
+    </div>
+
+    <div class="checkbox-consent" data-consent="comunicaciones" data-obligatorio="false">
+      <span class="check"></span>
+      <span>Acepto recibir comunicaciones de seguimiento, contenido formativo o información sobre nuevos servicios de Kiko Martínez. <em style="color:#8b7355;">(Opcional, puedes revocarla cuando quieras)</em></span>
+    </div>
+  </div>
+
+  <div class="pregunta" style="margin-top:18px;">
+    <label class="q-label">Confirma tu nombre y la fecha para registrar el consentimiento</label>
+    <span class="q-hint">Si ya rellenaste estos datos en la sección 1, puedes dejarlo igual aquí o repetirlo como firma de consentimiento.</span>
+    <input type="text" data-q="consent_firma" placeholder="Escribe tu nombre completo como firma">
+  </div>
+</section>
+
+<!-- AVISO FINAL -->
+<div class="aviso-final">
+  <h3>⚕️ Recordatorio importante</h3>
+  <p>
+    Este cuestionario y el programa que diseñaré a partir de él <strong>no sustituyen ningún tratamiento médico, fisioterapéutico ni psicológico</strong>.
+    Son una herramienta complementaria de autogestión. Ante cualquier duda o nuevo síntoma, consulta siempre con tu médico de referencia.
+  </p>
+</div>
+
+<!-- BOTÓN PDF -->
+<div class="pdf-section">
+  <button class="btn-pdf" onclick="generarPDF()">📄 Generar PDF y enviar</button>
+  <div class="btn-instrucciones">
+    Cuando pulses el botón, se descargará un PDF con todas tus respuestas.<br>
+    Envíamelo por WhatsApp y empezaré a diseñar tu programa.
+  </div>
+</div>
+
+<!-- FIRMA -->
+<div class="firma-final">
+  Con gratitud y cuidado,
+  <strong>Kiko Martínez · Bienestar Natural</strong>
+  Osteopatía · Coaching · Fitoterapia · Bienestar Integral
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ========= LÓGICA DE SELECCIÓN =========
+
+  // RADIO (opcion única)
+  var radioGroups = document.querySelectorAll('[data-tipo="radio"]');
+  radioGroups.forEach(function(group) {
+    var opciones = group.querySelectorAll('.opcion');
+    opciones.forEach(function(op) {
+      op.addEventListener('click', (function(currentOp, currentGroup) {
+        return function() {
+          var todas = currentGroup.querySelectorAll('.opcion');
+          todas.forEach(function(o) { o.classList.remove('selected'); });
+          currentOp.classList.add('selected');
+        };
+      })(op, group));
+    });
+  });
+
+  // MULTI (varias opciones)
+  var multiGroups = document.querySelectorAll('[data-tipo="multi"]');
+  multiGroups.forEach(function(group) {
+    var max = parseInt(group.getAttribute('data-max')) || 99;
+    var opciones = group.querySelectorAll('.opcion');
+    opciones.forEach(function(op) {
+      op.addEventListener('click', (function(currentOp, currentGroup, maxSel) {
+        return function() {
+          if (currentOp.classList.contains('selected')) {
+            currentOp.classList.remove('selected');
+          } else {
+            var seleccionadas = currentGroup.querySelectorAll('.opcion.selected').length;
+            if (seleccionadas < maxSel) {
+              currentOp.classList.add('selected');
+            } else {
+              alert('Puedes seleccionar como máximo ' + maxSel + ' opciones en esta pregunta.');
+            }
+          }
+        };
+      })(op, group, max));
+    });
+  });
+
+  // ESCALA 0-10
+  var escalas = document.querySelectorAll('[data-tipo="escala"]');
+  escalas.forEach(function(escala) {
+    var niveles = escala.querySelectorAll('.nivel');
+    niveles.forEach(function(nv) {
+      nv.addEventListener('click', (function(currentNv, currentEscala) {
+        return function() {
+          var todos = currentEscala.querySelectorAll('.nivel');
+          todos.forEach(function(n) { n.classList.remove('selected'); });
+          currentNv.classList.add('selected');
+        };
+      })(nv, escala));
+    });
+  });
+
+  // CHECKBOXES DE CONSENTIMIENTO LOPDGDD
+  var consents = document.querySelectorAll('.checkbox-consent');
+  consents.forEach(function(cb) {
+    cb.addEventListener('click', (function(currentCb) {
+      return function() {
+        currentCb.classList.toggle('selected');
+        currentCb.classList.remove('error');
+      };
+    })(cb));
+  });
+
+})();
+
+// ========= GENERACIÓN PDF =========
+
+function limpiar(texto) {
+  if (!texto) return '';
+  texto = String(texto);
+  texto = texto.replace(/á/g, 'a').replace(/Á/g, 'A');
+  texto = texto.replace(/é/g, 'e').replace(/É/g, 'E');
+  texto = texto.replace(/í/g, 'i').replace(/Í/g, 'I');
+  texto = texto.replace(/ó/g, 'o').replace(/Ó/g, 'O');
+  texto = texto.replace(/ú/g, 'u').replace(/Ú/g, 'U');
+  texto = texto.replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  texto = texto.replace(/ü/g, 'u').replace(/Ü/g, 'U');
+  texto = texto.replace(/¿/g, '').replace(/¡/g, '');
+  texto = texto.replace(/—/g, '-').replace(/–/g, '-');
+  texto = texto.replace(/“/g, '"').replace(/”/g, '"');
+  texto = texto.replace(/‘/g, "'").replace(/’/g, "'");
+  texto = texto.replace(/…/g, '...');
+  texto = texto.replace(/[^\x20-\x7E\n]/g, '');
+  return texto;
+}
+
+function recogerRespuestas() {
+  var respuestas = {};
+
+  // INPUTS / TEXTAREAS
+  var inputs = document.querySelectorAll('input[data-q], textarea[data-q]');
+  inputs.forEach(function(inp) {
+    var key = inp.getAttribute('data-q');
+    if (inp.value && inp.value.trim() !== '') {
+      respuestas[key] = inp.value.trim();
+    }
+  });
+
+  // RADIO
+  var radios = document.querySelectorAll('[data-tipo="radio"]');
+  radios.forEach(function(group) {
+    var key = group.getAttribute('data-q');
+    var seleccionada = group.querySelector('.opcion.selected');
+    if (seleccionada) {
+      respuestas[key] = seleccionada.getAttribute('data-val');
+    }
+  });
+
+  // MULTI
+  var multis = document.querySelectorAll('[data-tipo="multi"]');
+  multis.forEach(function(group) {
+    var key = group.getAttribute('data-q');
+    var seleccionadas = group.querySelectorAll('.opcion.selected');
+    if (seleccionadas.length > 0) {
+      var vals = [];
+      seleccionadas.forEach(function(s) { vals.push(s.getAttribute('data-val')); });
+      respuestas[key] = vals.join(' | ');
+    }
+  });
+
+  // ESCALA
+  var escalas = document.querySelectorAll('[data-tipo="escala"]');
+  escalas.forEach(function(escala) {
+    var key = escala.getAttribute('data-q');
+    var seleccionado = escala.querySelector('.nivel.selected');
+    if (seleccionado) {
+      respuestas[key] = seleccionado.getAttribute('data-val') + '/10';
+    }
+  });
+
+  return respuestas;
+}
+
+var MAPA_PREGUNTAS = {
+  // S1
+  nombre: { sec: 'DATOS PERSONALES', pregunta: 'Nombre y apellidos' },
+  edad: { sec: 'DATOS PERSONALES', pregunta: 'Edad' },
+  sexo: { sec: 'DATOS PERSONALES', pregunta: 'Sexo biologico' },
+  profesion: { sec: 'DATOS PERSONALES', pregunta: 'Profesion / ocupacion' },
+  altura: { sec: 'DATOS PERSONALES', pregunta: 'Altura (cm)' },
+  peso: { sec: 'DATOS PERSONALES', pregunta: 'Peso (kg)' },
+  // S2
+  motivo_principal: { sec: 'PUNTO DE PARTIDA', pregunta: 'Motivo principal' },
+  objetivo: { sec: 'PUNTO DE PARTIDA', pregunta: 'Objetivo prioritario' },
+  energia: { sec: 'PUNTO DE PARTIDA', pregunta: 'Nivel de energia vital' },
+  relacion_cuerpo: { sec: 'PUNTO DE PARTIDA', pregunta: 'Relacion cuerpo-mente' },
+  // S3
+  patologias: { sec: 'HISTORIAL MEDICO', pregunta: 'Patologias' },
+  cirugias: { sec: 'HISTORIAL MEDICO', pregunta: 'Cirugias' },
+  medicacion: { sec: 'HISTORIAL MEDICO', pregunta: 'Medicacion actual' },
+  suplementos_actuales: { sec: 'HISTORIAL MEDICO', pregunta: 'Suplementos actuales' },
+  alergias: { sec: 'HISTORIAL MEDICO', pregunta: 'Alergias / intolerancias' },
+  // S4
+  zonas_dolor: { sec: 'MAPA DEL CUERPO', pregunta: 'Zonas de dolor o tension' },
+  descripcion_dolor: { sec: 'MAPA DEL CUERPO', pregunta: 'Descripcion del dolor' },
+  lesiones: { sec: 'MAPA DEL CUERPO', pregunta: 'Lesiones recientes' },
+  intensidad_dolor: { sec: 'MAPA DEL CUERPO', pregunta: 'Intensidad de dolor habitual' },
+  postura: { sec: 'MAPA DEL CUERPO', pregunta: 'Postura habitual' },
+  // S5
+  actividad_actual: { sec: 'EXPERIENCIA CON MOVIMIENTO', pregunta: 'Actividad fisica actual' },
+  experiencia: { sec: 'EXPERIENCIA CON MOVIMIENTO', pregunta: 'Experiencia previa' },
+  experiencia_yoga: { sec: 'EXPERIENCIA CON MOVIMIENTO', pregunta: 'Experiencia con yoga' },
+  experiencia_fuerza: { sec: 'EXPERIENCIA CON MOVIMIENTO', pregunta: 'Experiencia con fuerza' },
+  // S6
+  fuerza: { sec: 'CAPACIDADES FISICAS', pregunta: 'Fuerza autoevaluada' },
+  movilidad: { sec: 'CAPACIDADES FISICAS', pregunta: 'Movilidad y flexibilidad' },
+  equilibrio: { sec: 'CAPACIDADES FISICAS', pregunta: 'Equilibrio' },
+  resistencia: { sec: 'CAPACIDADES FISICAS', pregunta: 'Resistencia cardiovascular' },
+  capacidades_basicas: { sec: 'CAPACIDADES FISICAS', pregunta: 'Capacidades basicas actuales' },
+  // S7
+  estres: { sec: 'SISTEMA NERVIOSO', pregunta: 'Nivel de estres percibido' },
+  perfil_SN: { sec: 'SISTEMA NERVIOSO', pregunta: 'Perfil del sistema nervioso' },
+  sueno: { sec: 'SISTEMA NERVIOSO', pregunta: 'Calidad del sueno' },
+  momento_vital: { sec: 'SISTEMA NERVIOSO', pregunta: 'Momento vital' },
+  relacion_mente: { sec: 'SISTEMA NERVIOSO', pregunta: 'Relacion con la mente' },
+  // S8
+  horas_sueno: { sec: 'ESTILO DE VIDA', pregunta: 'Horas de sueno' },
+  alimentacion: { sec: 'ESTILO DE VIDA', pregunta: 'Alimentacion habitual' },
+  habitos_tox: { sec: 'ESTILO DE VIDA', pregunta: 'Habitos a tener en cuenta' },
+  // S9
+  dias_semana: { sec: 'TIEMPO Y MATERIAL', pregunta: 'Dias por semana disponibles' },
+  minutos_sesion: { sec: 'TIEMPO Y MATERIAL', pregunta: 'Minutos por sesion' },
+  momento_dia: { sec: 'TIEMPO Y MATERIAL', pregunta: 'Momento del dia preferido' },
+  material: { sec: 'TIEMPO Y MATERIAL', pregunta: 'Material disponible' },
+  comprar_material: { sec: 'TIEMPO Y MATERIAL', pregunta: 'Disposicion a comprar material' },
+  // S10
+  atrae: { sec: 'PREFERENCIAS Y DISFRUTE', pregunta: 'Tipos de movimiento que atraen' },
+  aburre: { sec: 'PREFERENCIAS Y DISFRUTE', pregunta: 'Movimiento que aburre o bloquea' },
+  musica: { sec: 'PREFERENCIAS Y DISFRUTE', pregunta: 'Preferencia silencio / musica' },
+  // S11
+  compromiso: { sec: 'COMPROMISO Y MOTIVACION', pregunta: 'Nivel de compromiso' },
+  abandono: { sec: 'COMPROMISO Y MOTIVACION', pregunta: 'Causas de abandono pasadas' },
+  ayuda_compromiso: { sec: 'COMPROMISO Y MOTIVACION', pregunta: 'Que te ayudaria a mantener el compromiso' },
+  // S12
+  observaciones: { sec: 'OBSERVACIONES LIBRES', pregunta: 'Otras observaciones' },
+  fecha: { sec: 'OBSERVACIONES LIBRES', pregunta: 'Fecha del cuestionario' }
+};
+
+function generarPDF() {
+  try {
+    // VALIDACIÓN DE CONSENTIMIENTOS OBLIGATORIOS (RGPD / LOPDGDD)
+    var consentsObligatorios = document.querySelectorAll('.checkbox-consent[data-obligatorio="true"]');
+    var faltanConsents = [];
+    consentsObligatorios.forEach(function(cb) {
+      if (!cb.classList.contains('selected')) {
+        cb.classList.add('error');
+        faltanConsents.push(cb);
+      }
+    });
+
+    if (faltanConsents.length > 0) {
+      alert('Antes de descargar tu cuestionario, debes aceptar los consentimientos obligatorios de protección de datos marcados en rojo (sección 13).');
+      // Scroll hasta el primer checkbox sin marcar
+      faltanConsents[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    if (typeof window.jspdf === 'undefined') {
+      alert('Error al cargar el generador de PDF. Revisa tu conexion a internet.');
+      return;
+    }
+
+    var respuestas = recogerRespuestas();
+    var nombrePersona = respuestas.nombre || 'Cliente';
+
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    var pageWidth = doc.internal.pageSize.getWidth();
+    var pageHeight = doc.internal.pageSize.getHeight();
+    var margin = 18;
+    var y = margin;
+    var maxWidth = pageWidth - (margin * 2);
+
+    function nuevaPagina() {
+      doc.addPage();
+      y = margin;
+    }
+
+    function checkSpace(needed) {
+      if (y + needed > pageHeight - margin) { nuevaPagina(); }
+    }
+
+    // PORTADA
+    doc.setFillColor(13, 17, 23);
+    doc.rect(0, 0, pageWidth, 70, 'F');
+
+    doc.setTextColor(201, 169, 110);
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(10);
+    doc.text('KIKO MARTINEZ · BIENESTAR NATURAL', pageWidth / 2, 18, { align: 'center' });
+
+    doc.setTextColor(250, 247, 242);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(22);
+    doc.text('Movimiento Consciente', pageWidth / 2, 35, { align: 'center' });
+
+    doc.setTextColor(201, 169, 110);
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(13);
+    doc.text('Evaluacion Integral del Cuerpo en Movimiento', pageWidth / 2, 45, { align: 'center' });
+
+    doc.setTextColor(200, 200, 210);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Cuestionario completado por: ' + limpiar(nombrePersona), pageWidth / 2, 58, { align: 'center' });
+    var fechaHoy = respuestas.fecha || new Date().toLocaleDateString('es-ES');
+    doc.text('Fecha: ' + limpiar(fechaHoy), pageWidth / 2, 65, { align: 'center' });
+
+    y = 85;
+
+    // AGRUPAR POR SECCIÓN
+    var secciones = {};
+    Object.keys(MAPA_PREGUNTAS).forEach(function(key) {
+      if (respuestas[key]) {
+        var info = MAPA_PREGUNTAS[key];
+        if (!secciones[info.sec]) secciones[info.sec] = [];
+        secciones[info.sec].push({ pregunta: info.pregunta, respuesta: respuestas[key] });
+      }
+    });
+
+    // RENDERIZAR SECCIONES
+    var orden = [
+      'DATOS PERSONALES',
+      'PUNTO DE PARTIDA',
+      'HISTORIAL MEDICO',
+      'MAPA DEL CUERPO',
+      'EXPERIENCIA CON MOVIMIENTO',
+      'CAPACIDADES FISICAS',
+      'SISTEMA NERVIOSO',
+      'ESTILO DE VIDA',
+      'TIEMPO Y MATERIAL',
+      'PREFERENCIAS Y DISFRUTE',
+      'COMPROMISO Y MOTIVACION',
+      'OBSERVACIONES LIBRES'
+    ];
+
+    orden.forEach(function(nombreSec) {
+      if (!secciones[nombreSec]) return;
+
+      checkSpace(20);
+
+      // Cabecera de sección
+      doc.setFillColor(193, 112, 74);
+      doc.rect(margin, y, maxWidth, 8, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.text(nombreSec, margin + 3, y + 5.5);
+      y += 13;
+
+      // Preguntas y respuestas
+      doc.setTextColor(44, 62, 80);
+      secciones[nombreSec].forEach(function(item) {
+        checkSpace(15);
+
+        // Pregunta
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(44, 62, 80);
+        var preguntaTexto = limpiar(item.pregunta);
+        var preguntaLineas = doc.splitTextToSize(preguntaTexto, maxWidth);
+        preguntaLineas.forEach(function(linea) {
+          checkSpace(6);
+          doc.text(linea, margin, y);
+          y += 5;
+        });
+
+        // Respuesta
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(74, 74, 106);
+        var respuestaTexto = limpiar(item.respuesta);
+        var respuestaLineas = doc.splitTextToSize(respuestaTexto, maxWidth - 4);
+        respuestaLineas.forEach(function(linea) {
+          checkSpace(6);
+          doc.text(linea, margin + 4, y);
+          y += 5;
+        });
+
+        y += 4;
+      });
+
+      y += 4;
+    });
+
+    // CIERRE
+    checkSpace(30);
+    y += 5;
+    doc.setDrawColor(201, 169, 110);
+    doc.setLineWidth(0.5);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 7;
+
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(10);
+    doc.setTextColor(139, 115, 85);
+    var cierre = 'Gracias por compartir esta lectura honesta de ti mismo/a. Este documento es la base sobre la que construire tu Programa Integral de Movimiento.';
+    var cierreLineas = doc.splitTextToSize(cierre, maxWidth);
+    cierreLineas.forEach(function(linea) {
+      checkSpace(6);
+      doc.text(linea, margin, y);
+      y += 5;
+    });
+    y += 6;
+
+    // ============ BLOQUE DE REGISTRO DE CONSENTIMIENTO RGPD/LOPDGDD ============
+    nuevaPagina();
+
+    doc.setFillColor(44, 62, 80);
+    doc.rect(margin, y, maxWidth, 9, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.text('REGISTRO DE CONSENTIMIENTO - RGPD / LOPDGDD', margin + 3, y + 6);
+    y += 14;
+
+    doc.setTextColor(44, 62, 80);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9.5);
+    var textoConsentInfo = 'En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y la Ley Organica 3/2018 (LOPDGDD), se registran los siguientes consentimientos otorgados por el interesado al rellenar este cuestionario.';
+    var infoLineas = doc.splitTextToSize(textoConsentInfo, maxWidth);
+    infoLineas.forEach(function(linea) {
+      checkSpace(5);
+      doc.text(linea, margin, y);
+      y += 4.5;
+    });
+    y += 4;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.setTextColor(44, 62, 80);
+    doc.text('Responsable del tratamiento:', margin, y);
+    y += 5;
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(74, 74, 106);
+    doc.text('Kiko Martinez - Bienestar Natural', margin + 4, y);
+    y += 5;
+    doc.text('Osteopatia, Coaching, Fitoterapia y Bienestar Integral', margin + 4, y);
+    y += 8;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(44, 62, 80);
+    doc.text('Datos del interesado:', margin, y);
+    y += 5;
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(74, 74, 106);
+    var nombreConsent = respuestas.consent_firma || respuestas.nombre || '(no especificado)';
+    doc.text('Nombre: ' + limpiar(nombreConsent), margin + 4, y);
+    y += 5;
+    var ahora = new Date();
+    var fechaSello = ahora.toLocaleDateString('es-ES') + ' a las ' + ahora.toLocaleTimeString('es-ES');
+    doc.text('Fecha y hora del consentimiento: ' + limpiar(fechaSello), margin + 4, y);
+    y += 8;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(44, 62, 80);
+    doc.text('Consentimientos otorgados:', margin, y);
+    y += 6;
+
+    // Listar consentimientos
+    var consentsList = document.querySelectorAll('.checkbox-consent');
+    consentsList.forEach(function(cb) {
+      var aceptado = cb.classList.contains('selected');
+      var tipo = cb.getAttribute('data-consent');
+      var obligatorio = cb.getAttribute('data-obligatorio') === 'true';
+
+      var etiqueta = '';
+      if (tipo === 'rgpd') etiqueta = 'Tratamiento general de datos personales (RGPD art. 6.1.a)';
+      else if (tipo === 'salud') etiqueta = 'Tratamiento de datos de salud (RGPD art. 9.2.a)';
+      else if (tipo === 'comunicaciones') etiqueta = 'Recepcion de comunicaciones y contenido formativo';
+
+      var estado = aceptado ? '[X] ACEPTADO' : '[ ] NO ACEPTADO';
+      var oblig = obligatorio ? ' (Obligatorio)' : ' (Opcional)';
+
+      checkSpace(6);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(aceptado ? 76 : 139, aceptado ? 175 : 115, aceptado ? 80 : 85);
+      doc.setFontSize(9.5);
+      doc.text(estado, margin + 4, y);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(44, 62, 80);
+      var textoLinea = etiqueta + oblig;
+      var lineasLinea = doc.splitTextToSize(textoLinea, maxWidth - 35);
+      lineasLinea.forEach(function(l, idx) {
+        if (idx === 0) {
+          doc.text(l, margin + 32, y);
+        } else {
+          y += 4;
+          checkSpace(5);
+          doc.text(l, margin + 32, y);
+        }
+      });
+      y += 7;
+    });
+
+    y += 4;
+    doc.setDrawColor(216, 212, 203);
+    doc.setLineWidth(0.3);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 6;
+
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(8.5);
+    doc.setTextColor(139, 115, 85);
+    var derechosTxt = 'Derechos del interesado: el firmante puede ejercer sus derechos de acceso, rectificacion, supresion, oposicion, limitacion y portabilidad, asi como revocar este consentimiento en cualquier momento, contactando con Kiko Martinez a traves de los canales habituales. Tambien puede presentar reclamacion ante la Agencia Espanola de Proteccion de Datos (www.aepd.es).';
+    var derechosLineas = doc.splitTextToSize(derechosTxt, maxWidth);
+    derechosLineas.forEach(function(linea) {
+      checkSpace(5);
+      doc.text(linea, margin, y);
+      y += 4;
+    });
+    y += 8;
+    // ============ FIN BLOQUE CONSENTIMIENTO ============
+
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(193, 112, 74);
+    doc.setFontSize(11);
+    doc.text('Kiko Martinez · Bienestar Natural', margin, y);
+    y += 5;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(139, 115, 85);
+    doc.text('Osteopatia · Coaching · Fitoterapia · Bienestar Integral', margin, y);
+
+    // GUARDAR
+    var nombreArchivo = 'Movimiento_Consciente_' + limpiar(nombrePersona).replace(/\s+/g, '_') + '.pdf';
+    doc.save(nombreArchivo);
+
+  } catch (err) {
+    console.error(err);
+    alert('Ha ocurrido un error al generar el PDF. Por favor, contacta con Kiko.');
+  }
+}
+</script>
+
+</body>
+</html>
